@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+
+        }
+        table{
+            border: 5px solid rgb(84, 82, 82);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #heading{
+         text-decoration: underline;  
+        }
+        
+       </style>
+        <title>data showing</title>
+    </head>
+    <body>
+       <h1 id="heading">List of Special Avatar Api</h1>
+        <table>
+            <thead id="dataTable">
+                <th>Serial No.</th>
+                <th>Email</th>
+                <th>Avatar</th>
+            </thead>
+            <tbody class="dataShow">
+            </tbody>
+        </table>
+
+    </body>
+    <script>
+        let dataShow=document.querySelector(".dataShow");
+        let resultData=[];
+ fetch("https://reqres.in/api/users?page=1").then((res)=>res.json()).then((res)=>{
+    resultData=res.data;
+    console.log(resultData)
+    resultData.map((item)=>{
+        let row=document.createElement("tr");
+        let tDataId=document.createElement("td");
+        let tDataEmail=document.createElement("td");
+        let tDataAvatar=document.createElement("td");
+        let imgForavatar=document.createElement("img");
+          imgForavatar.setAttribute("src",item.avatar);
+          tDataAvatar.appendChild(imgForavatar);
+        tDataId.innerText=item.id;
+        tDataEmail.innerText=item.email
+        
+        row.appendChild(tDataId);
+        row.appendChild(tDataEmail);
+        row.appendChild(tDataAvatar);
+        dataShow.appendChild(row)
+        
+    })
+ })
+
+ 
+        </script>
+</html>
